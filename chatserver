@@ -6,8 +6,22 @@ import select
 import re 
 
 if len(sys.argv)!=2:
-    print("Input format be = ./chatserver ip:port ")
+    print("Input format should be given in = ./chatserver ip:port ")
     sys.exit()
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+Info = (sys.argv[1])
+a=Info.split(':')
+IP_addr=str(a[0])
+port=int(a[1])
+
+server.bind((IP_addr,port))
+
+server.listen(100)
+
+print('Waiting for client connections')
+
+
+clients=[]
+clients.append(server)
